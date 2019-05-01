@@ -12,9 +12,15 @@ class FileController {
    * GET files/:id
    */
   async show ({ params, response }) {
-    const file = await File.findOrFail(params.id)
+    try {
+      const file = await File.findOrFail(params.id)
 
-    return response.download(Helpers.tmpPath(`uploads/${file.file}`))
+      return response.download(Helpers.tmpPath(`uploads/${file.file}`))
+    } catch (error) {
+      return response
+        .status(error.status)
+        .send({ error: { message: 'Erro ao buscar o arquivo' } })
+    }
   }
 
   /**
