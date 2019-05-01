@@ -14,9 +14,6 @@ class FileController {
   async show ({ params, response }) {
     const file = await File.findOrFail(params.id)
 
-    const teste = Helpers.tmpPath(`uploads/${file.file}`)
-    console.log(teste)
-
     return response.download(Helpers.tmpPath(`uploads/${file.file}`))
   }
 
