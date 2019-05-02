@@ -15,7 +15,18 @@ class FileController {
     try {
       const file = await File.findOrFail(params.id)
 
-      return response.download(Helpers.tmpPath(`uploads/${file.file}`))
+      // return response.download(Helpers.tmpPath(`uploads/${file.file}`))
+      return response.download(await Helpers.tmpPath(`uploads/${file.file}`))
+
+      // let pathFile = null
+      // try {
+      //   pathFile = Helpers.tmpPath(`uploads/${file.file}`)
+      // } catch (error) {
+      //   return response
+      //     .status(error.status)
+      //     .send({ error: { message: 'Erro ao buscar o arquivo' } })
+      // }
+      // return response.download(pathFile)
     } catch (error) {
       return response
         .status(error.status)
