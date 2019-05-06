@@ -60,8 +60,6 @@ class TaskController {
    * @param {View} ctx.view
    */
   async show ({ params }) {
-    console.log(params)
-
     const task = await Task.findOrFail(params.id)
 
     return task
